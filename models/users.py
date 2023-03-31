@@ -9,6 +9,7 @@ from sqlalchemy import (
 )
 
 from db_initializer import Base
+import bcrypt 
 
 class User(Base):
     __tablename__ = "Users"
@@ -23,3 +24,15 @@ class User(Base):
 
     def __repr__(self) -> str:
         return "<User {full_name}!r>".format(full_name=self.full_name)
+
+    @staticmethod
+    def hash_password(password) -> str:
+        return bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+
+    def validate_password(self, password) -> bool: 
+        return{
+            "access_token":jwt.encode(
+                {"full_name": self.full_name, "email": self.email},
+                "ApplicationSecretKey"
+            )
+        }
