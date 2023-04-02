@@ -10,6 +10,7 @@ from sqlalchemy import (
 
 from db_initializer import Base
 import bcrypt 
+import jwt
 
 class User(Base):
     __tablename__ = "Users"
