@@ -16,3 +16,7 @@ class UserSchema(UserBaseSchema):
 
     class Config:
         orm_mode = True 
+
+class UserLoginSchema(BaseModel):
+    email: EmailStr = Field(alias="username")
+    password: str
