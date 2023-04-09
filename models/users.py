@@ -11,6 +11,8 @@ from sqlalchemy import (
 from db_initializer import Base
 import bcrypt 
 import jwt
+import settings
+
 
 class User(Base):
     __tablename__ = "Users"
@@ -35,5 +37,13 @@ class User(Base):
             "access_token":jwt.encode(
                 {"full_name": self.full_name, "email": self.email},
                 "ApplicationSecretKey"
+            )
+        }
+    
+    def generate_token(self) -> jwt:
+        return{
+            "access_token":jwt.encode(
+                {"full_name":self.full_name, "email":self.email},
+                settings.SECRET_KEY
             )
         }

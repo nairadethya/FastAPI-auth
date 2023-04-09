@@ -1,5 +1,5 @@
 import os
-
+import cloudinary 
 
 DATABASE_URL= "postgresql+psycopg2://{username}:{password}@{host}/{db_name}".format(
     host=os.getenv("POSTGRES_HOST"),
@@ -8,3 +8,7 @@ DATABASE_URL= "postgresql+psycopg2://{username}:{password}@{host}/{db_name}".for
     username=os.getenv("POSTGRES_USER"),
     password=os.getenv("POSTGRES_PASSWORD")
 )
+
+config = cloudinary.config(secure=True)
+
+SECRET_KEY = os.getenv("SECRET_KEY")
